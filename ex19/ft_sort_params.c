@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_params.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiot-- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/05 18:18:41 by aguiot--          #+#    #+#             */
-/*   Updated: 2018/11/06 15:09:35 by aguiot--         ###   ########.fr       */
+/*   Created: 2018/11/06 20:16:10 by aguiot--          #+#    #+#             */
+/*   Updated: 2018/11/06 20:16:12 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void		ft_putchar(char c);
+void	ft_putchar(char c);
 
-void		ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -24,51 +24,41 @@ void		ft_putstr(char *str)
 	}
 }
 
-int			ft_strcmp(char *s1, char *s2)
+int		ft_strcmp(char *s1, char *s2)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
 }
 
-void		display(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int		i;
+	int		stop;
+	char	*temp;
 
+	stop = 0;
+	while (!stop)
+	{
+		stop = 1;
+		i = 0;
+		while (++i < argc - 1)
+			if (ft_strcmp(argv[i], argv[i + 1]) > 0)
+			{
+				temp = argv[i];
+				argv[i] = argv[i + 1];
+				argv[i + 1] = temp;
+				stop = 0;
+			}
+	}
 	i = 0;
-	while (i < argc)
+	while (++i < argc)
 	{
 		ft_putstr(argv[i]);
 		ft_putchar('\n');
-		i++;
 	}
-}
-
-int			main(int argc, char **argv)
-{
-	int		i;
-	int		j;
-	char	*old;
-
-	i = 1;
-	if (argc == 1)
-		return (0);
-	while (i < argc)
-	{
-		j = 0;
-		while (argv[j])
-		{
-			if (ft_strcmp(argv[i], argv[j++]) < 0)
-			{
-				old = argv[i];
-				argv[i] = argv[j - 1];
-				argv[j - 1] = old;
-			}
-		}
-		i++;
-	}
-	display(argc, argv);
+	return (0);
 }
