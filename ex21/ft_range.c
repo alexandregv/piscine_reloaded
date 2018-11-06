@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguiot-- <aguiot--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 15:58:33 by aguiot--          #+#    #+#             */
-/*   Updated: 2018/11/06 16:29:20 by aguiot--         ###   ########.fr       */
+/*   Created: 2018/11/06 20:16:28 by aguiot--          #+#    #+#             */
+/*   Updated: 2018/11/06 20:16:30 by aguiot--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 int		*ft_range(int min, int max)
 {
-	int	i;
-	int	*tab;
+	int i;
+	int *array;
 
-	if (min > max)
+	if (min >= max)
 		return (0);
+	array = (int*)malloc(sizeof(*array) * (max - min));
 	i = 0;
-	tab = (int*)malloc(sizeof(int) * (max - min));
-	while (i < (max - min))
+	while (min < max)
 	{
-		tab[i] = min + i;
+		array[i] = min;
+		min++;
 		i++;
 	}
-	return (tab);
+	return (array);
 }
